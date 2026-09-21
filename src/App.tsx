@@ -30,6 +30,7 @@ import { SettingsModal } from "./components/settings/SettingsModal";
 import { NotificationDrawer } from "./components/notifications/NotificationDrawer";
 import { ContactsModal } from "./components/contacts/ContactsModal";
 import { ActionBanner } from "./components/common/ActionBanner";
+import { ApkDownloadModal } from "./components/common/ApkDownloadModal";
 
 export default function App() {
   // Splash sequence state
@@ -49,6 +50,7 @@ export default function App() {
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState<boolean>(false);
   const [isContactsOpen, setIsContactsOpen] = useState<boolean>(false);
+  const [isDownloadOpen, setIsDownloadOpen] = useState<boolean>(false);
 
   // Android Action Bridge & Call Safety State
   const [contacts, setContacts] = useState<Contact[]>(() => androidBridge.getContacts());
@@ -299,6 +301,7 @@ export default function App() {
           onOpenStudy={() => setIsStudyOpen(true)}
           onOpenJournal={() => setIsJournalOpen(true)}
           onOpenContacts={() => setIsContactsOpen(true)}
+          onOpenDownload={() => setIsDownloadOpen(true)}
         />
 
         {/* Action Execution Banner / Call Safety Banner */}
@@ -320,6 +323,7 @@ export default function App() {
               isVoiceListening={isVoiceListening}
               onOpenStudy={() => setIsStudyOpen(true)}
               onOpenJournal={() => setIsJournalOpen(true)}
+              onOpenDownload={() => setIsDownloadOpen(true)}
               recentMemories={memories}
               recentScans={scans}
               studyDecks={studyDecks}
@@ -422,6 +426,11 @@ export default function App() {
             StorageService.markNotificationsRead();
             setNotifications(StorageService.getNotifications());
           }}
+        />
+
+        <ApkDownloadModal
+          isOpen={isDownloadOpen}
+          onClose={() => setIsDownloadOpen(false)}
         />
       </div>
     </div>

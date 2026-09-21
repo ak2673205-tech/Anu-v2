@@ -12,6 +12,8 @@ import {
   Smile,
   ChevronRight,
   Lightbulb,
+  Smartphone,
+  Download,
 } from "lucide-react";
 import { CompanionOrb } from "../common/CompanionOrb";
 import {
@@ -33,6 +35,7 @@ interface HomeScreenProps {
   isVoiceListening: boolean;
   onOpenStudy: () => void;
   onOpenJournal: () => void;
+  onOpenDownload?: () => void;
   recentMemories: MemoryItem[];
   recentScans: ScanResult[];
   studyDecks: StudyDeck[];
@@ -47,6 +50,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   isVoiceListening,
   onOpenStudy,
   onOpenJournal,
+  onOpenDownload,
   recentMemories,
   recentScans,
   studyDecks,
@@ -106,6 +110,28 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <span>Log Mood</span>
         </button>
       </div>
+
+      {/* APK / Mobile Install Banner */}
+      {onOpenDownload && (
+        <div className="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-indigo-950/80 via-slate-900 to-cyan-950/80 border border-indigo-500/30 shadow-md">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-indigo-600/30 border border-indigo-400/30 flex items-center justify-center text-cyan-300">
+              <Smartphone className="w-4 h-4" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-white">Download Phone App (APK)</p>
+              <p className="text-[10px] text-slate-300">Android APK & 1-tap Home Screen install</p>
+            </div>
+          </div>
+          <button
+            onClick={onOpenDownload}
+            className="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-semibold flex items-center gap-1 transition-colors shadow-sm"
+          >
+            <Download className="w-3 h-3" />
+            <span>Install</span>
+          </button>
+        </div>
+      )}
 
       {/* 2. Large AI Companion Area */}
       <div className="relative p-5 rounded-3xl bg-gradient-to-b from-slate-900/90 to-slate-950/90 border border-slate-800/80 shadow-xl overflow-hidden text-center backdrop-blur-sm">

@@ -8,6 +8,7 @@ import {
   BookOpen,
   BookMarked,
   Users,
+  Smartphone,
 } from "lucide-react";
 import { UserProfile } from "../../types";
 
@@ -19,6 +20,7 @@ interface HeaderProps {
   onOpenStudy: () => void;
   onOpenJournal: () => void;
   onOpenContacts?: () => void;
+  onOpenDownload?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -28,6 +30,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenStudy,
   onOpenJournal,
   onOpenContacts,
+  onOpenDownload,
 }) => {
   const [timeStr, setTimeStr] = useState<string>("");
 
@@ -113,6 +116,18 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <BookMarked className="w-4 h-4" />
           </button>
+
+          {/* Download APK / Install PWA Modal */}
+          {onOpenDownload && (
+            <button
+              id="header-btn-download-apk"
+              onClick={onOpenDownload}
+              title="Download APK / Install on Phone"
+              className="relative p-2 rounded-xl text-cyan-400 hover:text-cyan-200 hover:bg-slate-900 transition-colors bg-cyan-950/40 border border-cyan-800/40"
+            >
+              <Smartphone className="w-4 h-4" />
+            </button>
+          )}
 
           {/* Notifications Drawer */}
           <button
