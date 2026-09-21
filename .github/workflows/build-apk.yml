@@ -78,6 +78,13 @@ jobs:
 
           echo "Temporary debug keystore verified."
 
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Accept Android SDK licenses
+        run: |
+          yes | sdkmanager --licenses 2>/dev/null || true
+
       - name: Build debug APK
         run: |
           gradle :app:assembleDebug --stacktrace --no-daemon
